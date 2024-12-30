@@ -17,6 +17,15 @@ A functional and convenient Todo App built on React and designed with a clean an
 - **SCSS**
 - **Bulma**
 
+## How to run project locally
+- Fork and clone this repository
+- Run `npm install` to install all dependencies
+- Run `npm start` to start the app
+- Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
+
+## Dependencies
+- Node.version: `v20.18.1` or higher
+
 ## Demo
 A live demo of the React Todo App is available at [DEMO](https://olha-rypich.github.io/todo-app/) .
 
