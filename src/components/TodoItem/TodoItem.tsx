@@ -1,18 +1,15 @@
 import classNames from 'classnames';
-import {
-  useContext, useEffect, useRef, useState,
-} from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Todo } from '../../types/Todo';
 import { TodosContext } from '../TodosContext';
 
 type Props = {
-  todo: Todo,
+  todo: Todo;
 };
 
 export const TodoItem: React.FC<Props> = ({ todo }) => {
-  const {
-    toggleTodo, deleteTodo, deletedIds, editedIds, editTodoTitle,
-  } = useContext(TodosContext);
+  const { toggleTodo, deleteTodo, deletedIds, editedIds, editTodoTitle } =
+    useContext(TodosContext);
   const { title, completed, id } = todo;
 
   const [editing, setEditing] = useState(false);
@@ -81,6 +78,7 @@ export const TodoItem: React.FC<Props> = ({ todo }) => {
         editing,
       })}
     >
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label className="todo__status-label">
         <input
           data-cy="TodoStatus"
@@ -114,7 +112,6 @@ export const TodoItem: React.FC<Props> = ({ todo }) => {
             {title}
           </span>
 
-          {/* Remove button appears only on hover */}
           <button
             type="button"
             className="todo__remove"
@@ -126,12 +123,10 @@ export const TodoItem: React.FC<Props> = ({ todo }) => {
         </>
       )}
 
-      {/* overlay will cover the todo while it is being updated */}
       <div
         data-cy="TodoLoader"
         className={classNames('modal overlay', {
-          'is-active': deletedIds.includes(todo.id)
-            || editedIds.includes(id),
+          'is-active': deletedIds.includes(todo.id) || editedIds.includes(id),
         })}
       >
         <div className="modal-background has-background-white-ter" />

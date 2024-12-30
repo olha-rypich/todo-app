@@ -29,7 +29,7 @@ export const TodoList: React.FC = () => {
         <TodoItem todo={item} key={item.id} />
       ))}
 
-      {tempTodo && (<TempTodoItem tempTodo={tempTodo} />)}
+      {tempTodo && <TempTodoItem tempTodo={tempTodo} />}
     </section>
   );
 };

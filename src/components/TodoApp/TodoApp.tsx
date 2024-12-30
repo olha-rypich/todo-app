@@ -33,13 +33,8 @@ export const TodoApp: React.FC = () => {
 
         {!!todos.length && <TodoList />}
 
-        {/* Hide the footer if there are no todos */}
-
         {!!todos.length && <Footer />}
       </div>
-
-      {/* Notification is shown in case of any error */}
-      {/* Add the 'hidden' class to hide the message smoothly */}
 
       <ErrorMessages />
     </div>

@@ -1,6 +1,4 @@
-import {
-  useContext, useEffect, useRef, useState,
-} from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { TodosContext } from '../TodosContext';
 import { ErrorMessage } from '../../types/ErrorMessage';
@@ -49,8 +47,7 @@ export const Header: React.FC = () => {
       return;
     }
 
-    addTodo(title.trim())
-      .then(reset);
+    addTodo(title.trim()).then(reset);
   };
 
   return (

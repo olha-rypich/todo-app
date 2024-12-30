@@ -14,21 +14,21 @@ type Props = {
 export const TodosContext = React.createContext<TodosContextType>({
   todos: [],
   tempTodo: null,
-  setTodos: () => { },
-  addTodo: async () => { },
-  toggleTodo: () => { },
-  deleteTodo: () => { },
-  clearCompletedTodos: () => { },
+  setTodos: () => {},
+  addTodo: async () => {},
+  toggleTodo: () => {},
+  deleteTodo: () => {},
+  clearCompletedTodos: () => {},
   filterStatus: Status.All,
-  setFilterStatus: () => { },
+  setFilterStatus: () => {},
   errorMessage: '',
-  setErrorMessage: () => { },
+  setErrorMessage: () => {},
   isSubmitting: false,
-  setIsSubmitting: () => { },
+  setIsSubmitting: () => {},
   deletedIds: [],
-  setDeletedIds: () => { },
+  setDeletedIds: () => {},
   editedIds: [],
-  editTodoTitle: () => { },
+  editTodoTitle: () => {},
 });
 
 export const TodosProvider: React.FC<Props> = ({ children }) => {
@@ -55,11 +55,12 @@ export const TodosProvider: React.FC<Props> = ({ children }) => {
       id: 0,
     });
 
-    return clientService.createTodo(createdTodo)
+    return clientService
+      .createTodo(createdTodo)
       .then(newTodo => {
         setTodos(currentTodos => [...currentTodos, newTodo]);
       })
-      .catch((error) => {
+      .catch(error => {
         setErrorMessage(ErrorMessage.adding);
         throw error;
       })
@@ -71,79 +72,88 @@ export const TodosProvider: React.FC<Props> = ({ children }) => {
 
   const toggleTodo = (id: number, toggledTodo: Todo) => {
     setErrorMessage('');
-    setEditedIds((ids) => [...ids, id]);
+    setEditedIds(ids => [...ids, id]);
 
     const editedTodo = {
       ...toggledTodo,
       completed: !toggledTodo.completed,
     };
 
-    return clientService.updateTodo(editedTodo)
+    return clientService
+      .updateTodo(editedTodo)
       .then(() => {
-        setTodos(prev => prev.map(currentTodo => {
-          if (currentTodo.id === editedTodo.id) {
-            return {
-              ...currentTodo,
-              completed: !currentTodo.completed,
-            };
-          }
+        setTodos(prev =>
+          prev.map(currentTodo => {
+            if (currentTodo.id === editedTodo.id) {
+              return {
+                ...currentTodo,
+                completed: !currentTodo.completed,
+              };
+            }
 
-          return currentTodo;
-        }));
+            return currentTodo;
+          }),
+        );
       })
-      .catch((error) => {
+      .catch(error => {
         setErrorMessage(ErrorMessage.updating);
         throw error;
       })
       .finally(() => {
-        setEditedIds((ids) => ids.filter(item => item !== id));
+        setEditedIds(ids => ids.filter(item => item !== id));
       });
   };
 
   const deleteTodo = (id: number) => {
     setIsSubmitting(true);
-    setDeletedIds((ids) => [...ids, id]);
+    setDeletedIds(ids => [...ids, id]);
 
-    return clientService.deleteTodo(id)
-      .then(() => setTodos(prev => prev
-        .filter(currentTodo => currentTodo.id !== id)))
-      .catch((error) => {
+    return clientService
+      .deleteTodo(id)
+      .then(() =>
+        setTodos(prev => prev.filter(currentTodo => currentTodo.id !== id)),
+      )
+      .catch(error => {
         setErrorMessage(ErrorMessage.deleting);
         throw error;
       })
-      .finally(() => setDeletedIds((ids) => ids
-        .filter(todoId => todoId !== id)));
+      .finally(() => setDeletedIds(ids => ids.filter(todoId => todoId !== id)));
   };
 
   const clearCompletedTodos = () => {
-    todos.filter(todo => todo.completed).forEach((todo) => {
-      deleteTodo(todo.id);
-    });
+    todos
+      .filter(todo => todo.completed)
+      .forEach(todo => {
+        deleteTodo(todo.id);
+      });
   };
 
   const editTodoTitle = (id: number, editedTodo: Todo) => {
     setErrorMessage('');
-    setEditedIds((ids) => [...ids, id]);
+    setEditedIds(ids => [...ids, id]);
 
-    setTodos(todos.map(currentTodo => {
-      if (currentTodo.id === editedTodo.id) {
-        return {
-          ...currentTodo,
-          title: editedTodo.title,
-        };
-      }
+    setTodos(
+      todos.map(currentTodo => {
+        if (currentTodo.id === editedTodo.id) {
+          return {
+            ...currentTodo,
+            title: editedTodo.title,
+          };
+        }
 
-      return currentTodo;
-    }));
+        return currentTodo;
+      }),
+    );
 
-    return clientService.updateTodo(editedTodo)
+    return clientService
+      .updateTodo(editedTodo)
       .then()
-      .catch((error) => {
+      .catch(error => {
         setErrorMessage(ErrorMessage.updating);
         throw error;
       })
       .finally(() => {
-        setEditedIds((ids) => ids.filter(item => item !== id));
+        setEditedIds(ids => ids.filter(item => item !== id));
       });
   };
 
@@ -168,8 +178,6 @@ export const TodosProvider: React.FC<Props> = ({ children }) => {
   };
 
   return (
-    <TodosContext.Provider value={value}>
-      {children}
-    </TodosContext.Provider>
+    <TodosContext.Provider value={value}>{children}</TodosContext.Provider>
   );
 };

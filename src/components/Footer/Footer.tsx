@@ -9,9 +9,10 @@ export const Footer: React.FC = () => {
 
   const notCompletedTodos = todos.filter(todo => !todo.completed);
 
-  const todoCount = (notCompletedTodos.length === 1)
-    ? '1 item left'
-    : `${notCompletedTodos.length} items left`;
+  const todoCount =
+    notCompletedTodos.length === 1
+      ? '1 item left'
+      : `${notCompletedTodos.length} items left`;
 
   return (
     <footer className="todoapp__footer" data-cy="Footer">
@@ -28,7 +29,7 @@ export const Footer: React.FC = () => {
         className="todoapp__clear-completed"
         data-cy="ClearCompletedButton"
         onClick={clearCompletedTodos}
-        disabled={!(completedTodos.length)}
+        disabled={!completedTodos.length}
       >
         Clear completed
       </button>
