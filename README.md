@@ -18,7 +18,7 @@ A functional and convenient Todo App built on React and designed with a clean an
 - **Bulma**
 
 ## Demo
-A live demo of the React Todo App is available at [DEMO](https://github.com/olha-rypich/todo-app) .
+A live demo of the React Todo App is available at [DEMO](https://olha-rypich.github.io/todo-app/) .
 
 # Preview
-<img align="center" alt="Todo App preview" width="1000px" src="https://github.com/olha-rypich/todo-app/blob/master/preview-todo.png" />
+<img align="center" alt="Todo App preview" width="1000px" src="https://github.com/olha-rypich/todo-app/blob/main/preview-todo.png" />
